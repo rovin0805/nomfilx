@@ -11,7 +11,7 @@ Learning React and ES6 by building a Movie Discovery App.
 
 ## API Verbs
 
-[The Movie DB](https://www.themoviedb.org/3/)
+[The Movie DB](https://developers.themoviedb.org/3/getting-started/introduction)
 
 - [x] Now playing (Movie)
 - [x] Upcoming (Movie)
