@@ -2,7 +2,7 @@
 
 Learning React and ES6 by building a Movie Discovery App.
 
-# Result
+## Result
 
 [https://rovin0805.github.io/nomfilx/]
 
