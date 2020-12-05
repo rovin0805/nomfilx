@@ -2,12 +2,16 @@
 
 Learning React and ES6 by building a Movie Discovery App.
 
+# Result
+
+[https://rovin0805.github.io/nomfilx/]
+
 ## Screens
 
-- [ ] Home
-- [ ] TV Shows
-- [ ] Search
-- [ ] Detail
+- [x] Home
+- [x] TV Shows
+- [x] Search
+- [x] Detail
 
 ## API Verbs
 
