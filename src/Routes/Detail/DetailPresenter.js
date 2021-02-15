@@ -75,10 +75,45 @@ const Overview = styled.p`
   opacity: 0.7;
   line-height: 1.5;
   width: 50%;
+  margin: 20px 0;
 `;
 
-const DetailPresenter = ({ result, loading, error }) =>
-  loading ? (
+const FlexBox = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+`;
+
+const ExtraInfo = styled.div`
+  margin-bottom: 10px;
+`;
+
+const Youtube = styled.span`
+  background-color: #f70000;
+  border-radius: 5px;
+  padding: 2px;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  margin-right: 10px;
+`;
+
+const SeasonPoster = styled.img.attrs((props) => ({ src: props.src }))`
+  width: 100px;
+  height: 150px;
+  border-radius: 5px;
+`;
+
+const DataWrapper = styled.div``;
+
+const SeasonData = styled.div`
+  margin: 20px 10px;
+  font-size: 15px;
+`;
+
+const DetailPresenter = ({ result, loading, error }) => {
+  console.log(result);
+  return loading ? (
     <>
       <Helmet>
         <title>Loading | Nomfilx</title>
@@ -142,11 +177,73 @@ const DetailPresenter = ({ result, loading, error }) =>
               <Item></Item>
             )}
           </ItemContainer>
+          <ExtraInfo>
+            {result.production_countries?.length > 0 && <Item>Made In </Item>}
+            <Item>
+              {result.production_countries.map((country, index) =>
+                index === result.production_countries.length - 1
+                  ? country.name
+                  : `${country.name}, `
+              )}
+            </Item>
+          </ExtraInfo>
+          <ExtraInfo>
+            <Item>Made By </Item>
+            <Item>
+              {result.production_companies?.length > 0 &&
+                result.production_companies.map((company, index) =>
+                  index === result.production_companies.length - 1
+                    ? company.name
+                    : `${company.name}, `
+                )}
+            </Item>
+          </ExtraInfo>
           <Overview>{result.overview}</Overview>
+          {result?.videos?.results.length > 0 &&
+            result.videos.results.map((link, index) => (
+              <ExtraInfo key={index}>
+                <Youtube>
+                  <a href={`https://www.youtube.com/watch?v=${link.key}`}>
+                    Youtube
+                  </a>
+                </Youtube>
+                <Item>
+                  <a href={`https://www.youtube.com/watch?v=${link.key}`}>
+                    {link.name}
+                  </a>
+                </Item>
+              </ExtraInfo>
+            ))}
+          <FlexBox>
+            {result?.seasons?.length > 0 &&
+              result.seasons.map((season, index) => (
+                <FlexBox key={index}>
+                  <SeasonPoster
+                    src={
+                      season.poster_path
+                        ? `https://image.tmdb.org/t/p/original${season.poster_path}`
+                        : require("../../assets/noPosterSmall.png")
+                    }
+                  />
+                  <DataWrapper>
+                    <SeasonData>{season.name}</SeasonData>
+                    <SeasonData>{season.air_date}</SeasonData>
+                    {season.episode_count > 0 && (
+                      <SeasonData>
+                        {season.episode_count === 1
+                          ? `${season.episode_count} Episode`
+                          : `${season.episode_count} Episodes`}
+                      </SeasonData>
+                    )}
+                  </DataWrapper>
+                </FlexBox>
+              ))}
+          </FlexBox>
         </Data>
       </Content>
     </Container>
   );
+};
 
 DetailPresenter.propTypes = {
   result: PropTypes.object,
