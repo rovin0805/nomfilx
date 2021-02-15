@@ -4,7 +4,7 @@ Learning React and ES6 by building a Movie Discovery App.
 
 ## Result
 
-[https://rovin0805.github.io/nomfilx/]
+[https://infallible-lichterman-63d801.netlify.app]
 
 ## Screens
 
